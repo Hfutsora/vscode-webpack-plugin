@@ -1,0 +1,76 @@
+{
+  "name": "co-render-test-core",
+  "displayName": "Co Render Test Core",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.62.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:co-render-test-core.preview"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "co-render-test-core.preview",
+        "title": "Co Render Preiew",
+        "category": "CoRender"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "co-render-test-core.preview",
+          "when": "resourceExtname == .vue"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "co-render-test-core.preview",
+          "when": "resourceExtname == .vue"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "yarn run compile-tests && yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.4",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.62.0",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "@vscode/test-electron": "^1.6.2",
+    "eslint": "^8.1.0",
+    "glob": "^7.1.7",
+    "mocha": "^9.1.3",
+    "ts-loader": "^9.2.5",
+    "typescript": "^4.4.4",
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0"
+  },
+  "dependencies": {
+    "babel-loader": "^8.2.3",
+    "fs-extra": "^10.0.0",
+    "mini-css-extract-plugin": "^2.4.5",
+    "require-from-string": "^2.0.2",
+    "sass": "^1.43.5",
+    "sass-loader": "^12.3.0",
+    "unescape-js": "^1.1.4",
+    "vue-loader": "^15.9.8"
+  }
+}
