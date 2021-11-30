@@ -33,12 +33,15 @@ export async function previewComponent(uri?: vscode.Uri): Promise<void> {
   if(!fileName || !currentPath) {
     return;
   }
-
   
   try {
-    process.env._buildComponent = fileName;
-
     const rootPath = await getRootPath(currentPath);
+
+    if(!rootPath) {return;}
+    
+    process.env._buildComponent = fileName;
+    process.env._relativePath = currentPath.replace(rootPath, '');
+
     const childProc: cp.ChildProcess = cp.spawn('npm.cmd', ['run', 'build'], { cwd: rootPath });
 
     childProc.stdout?.on('data', (data) => {
