@@ -4,10 +4,13 @@ Help developer code co component easily.
 
 ## Features
 
-- [x] Contextmenu command to build vue SFC component. 
-- [ ] Preview component with mock render.
-- [ ] Download platform online component.
-- [ ] Upload component to platform.
+[x] Contextmenu command to build vue SFC component. 
+
+[ ] Preview component with mock render.
+
+[ ] Download platform online component.
+
+[ ] Upload component to platform.
 
 ## Requirements
 
