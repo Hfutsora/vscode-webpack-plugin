@@ -9,6 +9,7 @@ import { createEnvOption } from "../utils/cpUtils";
 import * as webpack from 'webpack';
 
 import { renderChannel } from "../renderChannel";
+import { getRootPath } from "../utils/pathUtils";
 
 export async function previewComponent(uri?: vscode.Uri): Promise<void> {
   let filePath: string | undefined;
@@ -23,22 +24,29 @@ export async function previewComponent(uri?: vscode.Uri): Promise<void> {
   if (!filePath) {
     return;
   }
+  
+  const vuePathMatch = filePath.match(/(.+)\/(.+).vue$/);
 
-  const fileName = filePath.match(/.+\/(.+).vue$/)?.[1];
-
-  if(!fileName) {
+  const currentPath = vuePathMatch?.[1].slice(1);
+  const fileName = vuePathMatch?.[2];
+  
+  if(!fileName || !currentPath) {
     return;
   }
+
   
   try {
-    process.env.comp = fileName;
+    process.env._buildComponent = fileName;
 
-    const childProc: cp.ChildProcess = cp.spawn('npm.cmd', ['run', 'build', `--foo=${fileName}`], { cwd: '' });
+    const rootPath = await getRootPath(currentPath);
+    const childProc: cp.ChildProcess = cp.spawn('npm.cmd', ['run', 'build'], { cwd: rootPath });
 
     childProc.stdout?.on('data', (data) => {
       console.log(`stdout: ${data}`);
+
+      renderChannel.appendLine(data);
     });
-    
+
     childProc.stderr?.on('data', (data) => {
       console.error(`stderr: ${data}`);
     });
