@@ -1,10 +1,13 @@
 # co-render-test-core README
 
-This is the README for your extension "co-render-test-core".
+Help developer code co component easily.
 
 ## Features
 
-Help code co component easily.
+- [x] Contextmenu command to build vue SFC component. 
+- [ ] Preview component with mock render.
+- [ ] Download platform online component.
+- [ ] Upload component to platform.
 
 ## Requirements
 

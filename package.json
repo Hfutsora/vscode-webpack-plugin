@@ -2,7 +2,12 @@
   "name": "co-render-test-core",
   "displayName": "Co Render Test Core",
   "description": "",
+  "publisher": "hfutsora",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hfutsora/vscode-webpack-plugin"
+  },
   "engines": {
     "vscode": "^1.62.0"
   },
