@@ -1,6 +1,6 @@
-# corender-test-core README
+# co-render-test-core README
 
-This is the README for your extension "corender-test-core". After writing up a brief description, we recommend including the following sections.
+This is the README for your extension "co-render-test-core". After writing up a brief description, we recommend including the following sections.
 
 ## Features
 

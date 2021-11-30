@@ -6,6 +6,10 @@ import { getActiveFilePath } from "../utils/workspaceUtils";
 import * as cp from 'child_process';
 import { createEnvOption } from "../utils/cpUtils";
 
+import * as webpack from 'webpack';
+
+import { renderChannel } from "../renderChannel";
+
 export async function previewComponent(uri?: vscode.Uri): Promise<void> {
   let filePath: string | undefined;
 
@@ -26,10 +30,10 @@ export async function previewComponent(uri?: vscode.Uri): Promise<void> {
     return;
   }
   
-  console.log('previewComponent', filePath);
-
   try {
-    const childProc: cp.ChildProcess = cp.spawn('npm.cmd', ['run', 'build', '--config', 'webpack.config.js', '--comp', fileName], { cwd: 'e:/kanq/projects/co_browser_webpack_server' });
+    process.env.comp = fileName;
+
+    const childProc: cp.ChildProcess = cp.spawn('npm.cmd', ['run', 'build', `--foo=${fileName}`], { cwd: '' });
 
     childProc.stdout?.on('data', (data) => {
       console.log(`stdout: ${data}`);
@@ -42,7 +46,6 @@ export async function previewComponent(uri?: vscode.Uri): Promise<void> {
     childProc.on('close', (code) => {
       console.log(`child process exited with code ${code}`);
     });
-
   } catch (error) {
     console.log('error', error);
     await promptForOpenOutputChannel("Failed to preview the component. Please open the output channel for details.", DialogType.error);
