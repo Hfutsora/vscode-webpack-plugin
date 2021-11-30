@@ -26,7 +26,7 @@ export async function executeCommand(command: string, args: string[], options: c
       if (code !== 0 || result.indexOf("ERROR") > -1) {
         const error: IExecError = new Error(`Command "${command} ${args.toString()}" failed with exit code "${code}".`);
         if (result) {
-          error.result = result; // render-cli may print useful content by exit with error code
+          error.result = result;
         }
         reject(error);
       } else {

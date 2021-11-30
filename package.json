@@ -10,27 +10,27 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:co-render-test-core.preview"
+    "onCommand:co-render-test-core.build-component"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "co-render-test-core.preview",
-        "title": "Co Render Preiew",
+        "command": "co-render-test-core.build-component",
+        "title": "Co Component Build",
         "category": "CoRender"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "co-render-test-core.preview",
+          "command": "co-render-test-core.build-component",
           "when": "resourceExtname == .vue"
         }
       ],
       "explorer/context": [
         {
-          "command": "co-render-test-core.preview",
+          "command": "co-render-test-core.build-component",
           "when": "resourceExtname == .vue"
         }
       ]

@@ -9,7 +9,7 @@ import { getActiveFilePath } from './utils/workspaceUtils';
 export function activate(context: vscode.ExtensionContext) {
 	
   context.subscriptions.push(
-    vscode.commands.registerCommand('co-render-test-core.preview', (uri?: vscode.Uri) => previewComponent(uri))
+    vscode.commands.registerCommand('co-render-test-core.build-component', (uri?: vscode.Uri) => previewComponent(uri))
   );
 }
 

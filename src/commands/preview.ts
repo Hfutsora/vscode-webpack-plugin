@@ -4,7 +4,7 @@ import { DialogType, promptForOpenOutputChannel } from "../utils/uiUtils";
 import { getActiveFilePath } from "../utils/workspaceUtils";
 
 import * as cp from 'child_process';
-import { createEnvOption } from "../utils/cpUtils";
+import { createEnvOption, executeCommandWithProgress } from "../utils/cpUtils";
 
 import * as webpack from 'webpack';
 
@@ -13,8 +13,6 @@ import { getRootPath } from "../utils/pathUtils";
 
 export async function previewComponent(uri?: vscode.Uri): Promise<void> {
   let filePath: string | undefined;
-
-  console.log('uri', uri);
 
   try {
     filePath =  uri?.path ?? await getActiveFilePath(uri);
@@ -42,21 +40,7 @@ export async function previewComponent(uri?: vscode.Uri): Promise<void> {
     process.env._buildComponent = fileName;
     process.env._relativePath = currentPath.replace(rootPath, '');
 
-    const childProc: cp.ChildProcess = cp.spawn('npm.cmd', ['run', 'build'], { cwd: rootPath });
-
-    childProc.stdout?.on('data', (data) => {
-      console.log(`stdout: ${data}`);
-
-      renderChannel.appendLine(data);
-    });
-
-    childProc.stderr?.on('data', (data) => {
-      console.error(`stderr: ${data}`);
-    });
-    
-    childProc.on('close', (code) => {
-      console.log(`child process exited with code ${code}`);
-    });
+    executeCommandWithProgress(`Building the component ${fileName}...`, 'npm.cmd', ['run', 'build'], { cwd: rootPath });
   } catch (error) {
     console.log('error', error);
     await promptForOpenOutputChannel("Failed to preview the component. Please open the output channel for details.", DialogType.error);
