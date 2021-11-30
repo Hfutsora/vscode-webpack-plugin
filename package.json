@@ -1,7 +1,7 @@
 {
   "name": "co-render-test-core",
   "displayName": "Co Render Test Core",
-  "description": "",
+  "description": "Co platform develop plugin.",
   "publisher": "hfutsora",
   "version": "0.0.3",
   "repository": {
