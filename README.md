@@ -6,6 +6,8 @@ Help developer code co component easily.
 
 [x] Contextmenu command to build vue SFC component. 
 
+[x] Contextmenu command to build vue SFC components under catalog. 
+
 [ ] Preview component with mock render.
 
 [ ] Download platform online component.

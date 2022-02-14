@@ -3,7 +3,7 @@
   "displayName": "Co Render Test Core",
   "description": "Co platform develop plugin.",
   "publisher": "hfutsora",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/Hfutsora/vscode-webpack-plugin"
@@ -22,7 +22,12 @@
     "commands": [
       {
         "command": "co-render-test-core.build-component",
-        "title": "Co Component Build",
+        "title": "Co Build Component",
+        "category": "CoRender"
+      },
+      {
+        "command": "co-render-test-core.build-catalog",
+        "title": "Co Build Components",
         "category": "CoRender"
       }
     ],
@@ -37,6 +42,10 @@
         {
           "command": "co-render-test-core.build-component",
           "when": "resourceExtname == .vue"
+        },
+        {
+          "command": "co-render-test-core.build-catalog",
+          "when": "explorerResourceIsFolder"
         }
       ]
     }
@@ -50,12 +59,15 @@
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "yarn run compile-tests && yarn run compile && yarn run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "release-major": "standard-version -r major",
+    "release-minor": "standard-version -r minor",
+    "release-patch": "standard-version -r patch"
   },
   "devDependencies": {
     "@types/glob": "^7.1.4",
     "@types/mocha": "^9.0.0",
-    "@types/node": "14.x",
+    "@types/node": "^17.0.17",
     "@types/vscode": "^1.62.0",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
@@ -63,6 +75,7 @@
     "eslint": "^8.1.0",
     "glob": "^7.1.7",
     "mocha": "^9.1.3",
+    "standard-version": "^9.3.2",
     "ts-loader": "^9.2.5",
     "typescript": "^4.4.4",
     "webpack": "^5.52.1",

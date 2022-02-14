@@ -1,7 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { previewComponent } from './commands/preview';
+import { buildComponent, buildCatalog } from './commands/preview';
 import { getActiveFilePath } from './utils/workspaceUtils';
 
 // this method is called when your extension is activated
@@ -9,7 +9,8 @@ import { getActiveFilePath } from './utils/workspaceUtils';
 export function activate(context: vscode.ExtensionContext) {
 	
   context.subscriptions.push(
-    vscode.commands.registerCommand('co-render-test-core.build-component', (uri?: vscode.Uri) => previewComponent(uri))
+    vscode.commands.registerCommand('co-render-test-core.build-component', (uri?: vscode.Uri) => buildComponent(uri)),
+    vscode.commands.registerCommand('co-render-test-core.build-catalog', (uri?: vscode.Uri) => buildCatalog(uri)),
   );
 }
 
